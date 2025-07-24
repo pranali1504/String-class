@@ -236,9 +236,6 @@ public final class MyString
 	   System.out.println(str2.contains("llo"));
 
    }
-   
   
-   
-   
 }
    
