@@ -217,6 +217,41 @@ public final class MyString
 			   if(startsWith(str,i)) return true;
 		   return false;
 	   }
+	   public MyString[] split(MyString regex) 
+	   {
+		int count=0;
+		for(int i=0;i<arr.length;i++)
+			if(arr[i]==regex.charAt(0)) count++;
+		
+		MyString [] newArr=new MyString[count+1];
+		int indx=0;
+		MyString str=new MyString("");
+		for(char ele:arr)
+		{
+			if(ele!=regex.charAt(0))
+				str=str.concat(new MyString(ele+""));
+			else {
+				newArr[indx++]=str;
+				str=new MyString("");
+			}
+		}
+		newArr[indx]=str;
+		return newArr;
+	   }
+	   public MyString replaceAll(MyString str1, MyString str2) 
+	   {
+		MyString[] newArr= new MyString(arr).split(new MyString(" "));
+	System.out.println(Arrays.toString(newArr));
+		MyString str=new MyString("");
+		int indx=0;
+		for (MyString ele:newArr)
+		{
+			if(ele.equals(str1)) 
+				newArr[indx]=str2;
+			str=str.concat(new MyString(newArr[indx++]+" "));
+		}	 
+		return str.trim();
+	   }
 	@Override
     public String toString()
     {
@@ -228,14 +263,15 @@ public final class MyString
    
    public static void main(String[] args)
    {
-	   String str=new String("Hllo java ello ava");
+	   String str=new String("Hello java hello java");
 	   System.out.println(str);
-	   System.out.println(str.replaceFirst("[aeiou]",""));
+	   String str1=str.replaceAll("java", "JAVA");
+	   System.out.println(str1);
 	   
-	   MyString str2=new MyString("Hello java ello ava");
-	   System.out.println(str2.contains("llo"));
+	   MyString str2=new MyString("Hello java hello java");
+	   MyString str3=str2.replaceAll(new MyString("java"),new MyString( "JAVA"));
+	   System.out.println(str3);
 
    }
-  
 }
    
